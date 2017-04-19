@@ -5,10 +5,15 @@
   "author": "heroprotagonist <jstepper91@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node -r babel-register index"
+    "start": "nodemon -r babel-register -r babel-polyfill index"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-es2017": "^6.24.1"
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-latest": "^6.24.1",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0"
   }
 }
