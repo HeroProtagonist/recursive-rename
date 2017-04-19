@@ -1,0 +1,14 @@
+{
+  "name": "recursive-rename",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "heroprotagonist <jstepper91@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node -r babel-register index"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1"
+  }
+}
