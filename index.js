@@ -1,15 +1,20 @@
-const testFolder = '.'
-const fs = require('fs')
-const path = require('path')
+import path from 'path'
+import Promise from 'bluebird'
+const fs = Promise.promisifyAll(require('fs'))
 
-fs.readdir(testFolder, (err, files) => {
+const recursiveRename = async () => {
+  const testFolder = '.'
+  const files = await fs.readdirAsync(testFolder)
 
-  files.forEach(file => {
+  files.forEach(async file => {
+    const filePath = path.join(__dirname, file)
 
-    fs.stat(path.join(__dirname, file), (err, stats) => {
-      if (stats) console.log(file, stats.isDirectory())
-    })
+    const stats = await fs.statAsync(filePath)
+
+    if (stats) console.log(file, stats.isDirectory())
 
   })
+}
 
-})
+
+recursiveRename()
