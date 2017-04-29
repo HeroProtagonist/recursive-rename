@@ -1,12 +1,13 @@
 {
   "name": "recursive-rename",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "heroprotagonist <jstepper91@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node -r babel-register -r babel-polyfill index",
-    "watch": "nodemon -r babel-register -r babel-polyfill index"
+    "start": "node -r babel-register -r babel-polyfill src/index",
+    "watch": "nodemon -r babel-register -r babel-polyfill src/index",
+    "build": "babel src --out-dir dist"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
