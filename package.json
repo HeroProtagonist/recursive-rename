@@ -9,6 +9,17 @@
     "watch": "nodemon -r babel-register -r babel-polyfill src/index",
     "build": "babel src --out-dir dist"
   },
+  "keywords": [
+    "rename",
+    "node"
+  ],
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HeroProtagonist/recursive-rename.git"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-polyfill": "^6.23.0",
