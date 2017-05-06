@@ -5,9 +5,12 @@
   "author": "heroprotagonist <jstepper91@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "babel src --out-dir dist",
+    "build:watch": "babel src --out-dir dist --watch",
     "start": "node -r babel-register -r babel-polyfill src/index",
-    "watch": "nodemon -r babel-register -r babel-polyfill src/index",
-    "build": "babel src --out-dir dist"
+    "test": "mocha --compilers js:babel-register",
+    "watch": "nodemon -r babel-register -r babel-polyfill src/index"
+  },
   },
   "keywords": [
     "rename",
@@ -30,13 +33,15 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "expect": "^1.20.2",
+    "mocha": "^3.3.0",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "bluebird": "^3.5.0",
+    "colors": "^1.1.2",
     "global": "^4.3.2",
-    "minimist": "^1.2.0",
-    "recursive-rename": "^1.0.0"
+    "minimist": "^1.2.0"
   }
 }
