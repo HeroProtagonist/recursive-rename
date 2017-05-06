@@ -11,6 +11,9 @@
     "test": "mocha --compilers js:babel-register",
     "watch": "nodemon -r babel-register -r babel-polyfill src/index"
   },
+  "preferGlobal": true,
+  "bin": {
+    "rename": "dist/index.js"
   },
   "keywords": [
     "rename",
