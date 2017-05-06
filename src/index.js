@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-import Traverser from './traverse'
+import Traverser from './traverser'
 import Validator from './validator'
 import excludes from './excludes'
 
