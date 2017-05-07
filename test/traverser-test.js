@@ -31,4 +31,8 @@ describe('Traverse', () => {
     mock.restore()
   })
 
+  it('should pass', () => {
+    expect(true).toExist()
+  })
+
 })
