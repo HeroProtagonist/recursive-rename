@@ -1,0 +1,10 @@
+sudo: false
+language: node_js
+cache: yarn
+notifications:
+  email: false
+script:
+  - yarn cover
+  - yarn check-coverage
+after_success:
+  - yarn report-coverage
