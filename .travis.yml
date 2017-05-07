@@ -7,6 +7,5 @@ notifications:
   email: false
 script:
   - yarn cover
-  - yarn check-coverage
 after_success:
   - yarn report-coverage
