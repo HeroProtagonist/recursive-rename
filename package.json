@@ -5,8 +5,10 @@
   "author": "heroprotagonist <jstepper91@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "prebuild": "rimraf dist",
     "build": "babel src --out-dir dist",
     "build:watch": "babel src --out-dir dist --watch",
+    "cover": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "start": "node -r babel-register -r babel-polyfill src/index",
     "test": "mocha --compilers js:babel-register",
     "watch": "nodemon -r babel-register -r babel-polyfill src/index"
@@ -39,7 +41,9 @@
     "expect": "^1.20.2",
     "mocha": "^3.3.0",
     "mock-fs": "^4.3.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "nyc": "^10.3.2",
+    "rimraf": "^2.6.1"
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
