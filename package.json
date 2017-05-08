@@ -12,6 +12,7 @@
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "start": "node -r babel-register -r babel-polyfill src/index",
     "test": "mocha --compilers js:babel-register",
+    "test:watch": "npm t --  --watch",
     "watch": "nodemon -r babel-register -r babel-polyfill src/index"
   },
   "engines" : {
