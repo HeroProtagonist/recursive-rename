@@ -1,5 +1,7 @@
 .DS_Store
-node_modules/
+.nyc_output/
 dist/
+coverage/
+node_modules/
 *.tgz
 *.log

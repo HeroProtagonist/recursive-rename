@@ -1,6 +1,7 @@
+import colors from 'colors'
 import path from 'path'
 import Promise from 'bluebird'
-
+console.log('OMG Rainbows!'.rainbow) // rainbow
 const fs = Promise.promisifyAll(require('fs'))
 
 class Traverser {
@@ -18,10 +19,10 @@ class Traverser {
       const stats = await fs.statAsync(filePath)
 
       if (stats.isDirectory() && !this.excludes.has(file)) {
-        console.log('Folder: ', file)
+        console.log(`Folder:  ${file}`.red)
         this.traverse(filePath)
       } else {
-        console.log('This file is: ', file)
+        console.log(`This file is: ${file}`.green)
       }
     })
   }

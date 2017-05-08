@@ -1,6 +1,6 @@
-const exludes = new Set()
+const excludes = new Set()
 
-exludes.add('node_modules')
-exludes.add('.git')
+excludes.add('node_modules')
+excludes.add('.git')
 
-export default exludes
+export default excludes

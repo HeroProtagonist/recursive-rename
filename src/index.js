@@ -1,7 +1,13 @@
+#! /usr/bin/env node
+
+import Traverser from './traverser'
+import Validator from './validator'
+import excludes from './excludes'
+
 const argv = require('minimist')(process.argv.slice(2))
 
-import Traverser from './traverse'
-import excludes from './excludes'
+console.log(argv)
+const validator = new Validator(argv)
 
 function recursiveRename (initialPath) {
   const traverser = new Traverser(excludes, initialPath)
