@@ -32,16 +32,24 @@ class Validator {
     const { excludes, override } = options
 
     if (excludes) this._handleExcludes(excludes)
-    if (override) this._handleOverrides(override)
+    if (override) this._handleOverride(override)
 
   }
 
   _handleExcludes (excludes) {
-    return true
+    if (!Array.isArray(excludes)) {
+      throw new Error('Excludes must be an array')
+    }
+
+    this.excludes = excludes
   }
 
-  _handleOverrides (override) {
-    return true
+  _handleOverride (override) {
+    if (typeof override !== 'boolean') {
+      throw new Error('Override must be a boolean')
+    }
+
+   this.override = override
   }
 
 }
