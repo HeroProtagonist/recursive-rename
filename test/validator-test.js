@@ -1,7 +1,7 @@
 import expect from 'expect'
 import Validator from '../src/validator'
 
-describe.only('Validator', () => {
+describe('Validator', () => {
   describe('from node receiving options', () => {
     xit('should create instance', () => {
       const validator = new Validator()
@@ -60,14 +60,12 @@ describe.only('Validator', () => {
 
         expect(errors[0].message).toEqual('When supplied options they must be an object')
         expect(errors.length).toEqual(3)
-///error arrays
-// error overide
       })
     })
 
     describe('#_handleOptions', () => {
       const excludesSpy = expect.spyOn(Validator.prototype, '_handleExcludes')
-      const overridesSpy = expect.spyOn(Validator.prototype, '_handleOverrides')
+      const overridesSpy = expect.spyOn(Validator.prototype, '_handleOverride')
 
       afterEach(() => {
         excludesSpy.reset()
@@ -86,15 +84,79 @@ describe.only('Validator', () => {
 
       it('calls proper functions when provided only override options', () => {
         const override = [1, 2, 3]
-        const validator = new Validator(undefined, 'jsx', 'js', { excludes })
+        const validator = new Validator(undefined, 'jsx', 'js', { override })
 
-        expect(excludesSpy.calls.length).toBe(1)
-        expect(excludesSpy).toHaveBeenCalledWith(excludes)
+        expect(overridesSpy.calls.length).toBe(1)
+        expect(overridesSpy).toHaveBeenCalledWith(override)
 
-        expect(overridesSpy.calls.length).toBe(0)
+        expect(excludesSpy.calls.length).toBe(0)
       })
 
+      after(() => {
+        expect.restoreSpies()
+      })
+    })
 
+    describe('#_handleExcludes', () => {
+      it('errors if not supplied an array', () => {
+        const errors = []
+        try {
+          new Validator(undefined, 'jsx', 'js', { excludes: true })
+        } catch (e) {
+          errors.push(e)
+        }
+
+        try {
+          new Validator(undefined, 'jsx', 'js', { excludes: 'hi' })
+        } catch (e) {
+          errors.push(e)
+        }
+
+        expect(errors[0].message).toEqual('Excludes must be an array')
+        expect(errors.length).toEqual(2)
+      })
+
+      it('does not set excludes if not supplied', () => {
+        const validator = new Validator(undefined, 'jsx', 'js', {})
+        expect(validator.exludes).toNotExist()
+      })
+
+      it('sets excludes', () => {
+        const excludes = ['1', '2', '3']
+        const validator = new Validator(undefined, 'jsx', 'js', { excludes })
+        expect(validator.excludes).toBe(excludes)
+      })
+    })
+
+    describe('#_handleOverride', () => {
+      it('errors if not supplied an boolean', () => {
+        const errors = []
+        try {
+          new Validator(undefined, 'jsx', 'js', { override: () => 'yo' })
+        } catch (e) {
+          errors.push(e)
+        }
+
+        try {
+          new Validator(undefined, 'jsx', 'js', { override: 'false' })
+        } catch (e) {
+          errors.push(e)
+        }
+
+        expect(errors[0].message).toEqual('Override must be a boolean')
+        expect(errors.length).toEqual(2)
+      })
+
+      it('does not set overide if not supplied', () => {
+        const validator = new Validator(undefined, 'jsx', 'js', {})
+        expect(validator.overide).toNotExist()
+      })
+
+      it('sets excludes', () => {
+        const override = true
+        const validator = new Validator(undefined, 'jsx', 'js', { override })
+        expect(validator.override).toBe(override)
+      })
     })
 
   })
