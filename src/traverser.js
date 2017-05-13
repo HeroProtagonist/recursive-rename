@@ -1,7 +1,7 @@
 import colors from 'colors'
 import path from 'path'
 import Promise from 'bluebird'
-console.log('OMG Rainbows!'.rainbow) // rainbow
+
 const fs = Promise.promisifyAll(require('fs'))
 
 class Traverser {
