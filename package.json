@@ -11,11 +11,11 @@
     "cover": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "start": "node -r babel-register -r babel-polyfill src/index",
-    "test": "mocha --compilers js:babel-register",
+    "test": "NODE_ENV=test mocha --compilers js:babel-register",
     "test:watch": "npm t --  --watch",
     "watch": "nodemon -r babel-register -r babel-polyfill src/index"
   },
-  "engines" : {
+  "engines": {
     "node": ">=6.8.1"
   },
   "preferGlobal": true,
@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-plugin-rewire": "^1.1.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-latest": "^6.24.1",
