@@ -33,7 +33,7 @@ class Traverser {
         // console.log(`Folder:  ${file}`.red)
         await this.traverse(options, filePath)
       } else {
-        console.log(`This file is: ${file}`.green)
+        await handleFile(file, filePath, dry)
       }
     }
 
@@ -42,6 +42,14 @@ class Traverser {
 
 }
 
+const handleFile = async (file, filePath, dry) => {
+
+  if (dry) {
+    console.log(`Untouched: ${file}`.green)
+  } else {
+    const filePathNoExt = filePath.split('.')[0]
+    console.log(`Renaming: ${filePathNoExt}`.green)
+    await renameAsync(filePath, `${filePathNoExt}.js`)
   }
 
 }
