@@ -4,27 +4,44 @@ import Promise from 'bluebird'
 
 const fs = Promise.promisifyAll(require('fs'))
 
+const {
+  readdirAsync,
+  renameAsync,
+  statAsync,
+} = fs
+
 class Traverser {
-  constructor (excludes, initialPath) {
-    this.excludes = excludes
+  constructor (initialPath, options) {
+    const { excludes, dest, src } = options
+
     this.initialPath = initialPath
+    this.excludes = excludes
+    this.dest = dest
+    this.src = src
   }
 
-  async traverse (rootPath = this.initialPath) {
-    const files = await fs.readdirAsync(rootPath)
+  async traverse (options = {}, rootPath = this.initialPath) {
+    const { dry } = options
+    const files = await readdirAsync(rootPath)
 
-    files.forEach(async file => {
+    for (let file of files) {
       const filePath = makePath(rootPath, file)
 
-      const stats = await fs.statAsync(filePath)
+      const stats = await statAsync(filePath)
 
       if (stats.isDirectory() && !this.excludes.has(file)) {
-        console.log(`Folder:  ${file}`.red)
-        this.traverse(filePath)
+        // console.log(`Folder:  ${file}`.red)
+        await this.traverse(options, filePath)
       } else {
         console.log(`This file is: ${file}`.green)
       }
-    })
+    }
+
+    return Promise.resolve()
+  }
+
+}
+
   }
 
 }
