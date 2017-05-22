@@ -20,7 +20,7 @@
   },
   "preferGlobal": true,
   "bin": {
-    "rename": "dist/index.js"
+    "rename": "dist/index-bin.js"
   },
   "keywords": [
     "rename",
