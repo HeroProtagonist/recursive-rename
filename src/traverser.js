@@ -30,10 +30,9 @@ class Traverser {
       const stats = await statAsync(filePath)
 
       if (stats.isDirectory() && !this.excludes.has(file)) {
-        // console.log(`Folder:  ${file}`.red)
         await this.traverse(options, filePath)
       } else {
-        await handleFile(file, filePath, dry)
+        await handleFile(file, filePath, this.src, this.dest, dry)
       }
     }
 
@@ -42,16 +41,19 @@ class Traverser {
 
 }
 
-const handleFile = async (file, filePath, dry) => {
+const handleFile = async (file, filePath, src, dest, dry) => {
+  const splitFilePath = filePath.split('.')
+  const filePathNoExt = splitFilePath[0]
+  const srcExt = splitFilePath[1]
 
-  if (dry) {
-    console.log(`Untouched: ${file}`.green)
-  } else {
-    const filePathNoExt = filePath.split('.')[0]
-    console.log(`Renaming: ${filePathNoExt}`.green)
-    await renameAsync(filePath, `${filePathNoExt}.js`)
+  if (srcExt === src) {
+    if (dry) {
+      console.log(`${filePath}`.red + ' --> '.yellow + `${filePathNoExt}.${dest}`.green)
+    } else {
+      console.log(`Renaming: ${filePathNoExt}`.green)
+      await renameAsync(filePath, `${filePathNoExt}.${dest}`)
+    }
   }
-
 }
 
 const makePath = (base = __dirname, file) => path.join(base, file)
