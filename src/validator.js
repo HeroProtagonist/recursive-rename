@@ -1,6 +1,6 @@
 class Validator {
-  constructor (argv, src, dest, options) {
-    this._determineExtenstions(argv, src, dest)
+  constructor (src, dest, options) {
+    this._determineExtenstions(src, dest)
     this._handleOptions(options)
   }
 
@@ -12,11 +12,9 @@ class Validator {
     return this._dest
   }
 
-  _determineExtenstions (argv, src, dest) {
-    const cliInputs = argv ? argv._ : []
-
-    this._src = src || cliInputs[0]
-    this._dest = dest || cliInputs[1]
+  _determineExtenstions (src, dest) {
+    this._src = src
+    this._dest = dest
 
     if (!this._src || !this._dest) {
       throw new Error('A source and destination are required')
