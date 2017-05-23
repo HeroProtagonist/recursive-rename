@@ -50,7 +50,7 @@ const handleFile = async (file, filePath, src, dest, dry) => {
     if (dry) {
       console.log(`${filePath}`.red + ' --> '.yellow + `${filePathNoExt}.${dest}`.green)
     } else {
-      console.log(`Renaming: ${filePathNoExt}`.green)
+      console.log('Renaming: '.blue + `${filePath}`.red + ' --> '.yellow + `${filePathNoExt}.${dest}`.green)
       await renameAsync(filePath, `${filePathNoExt}.${dest}`)
     }
   }
