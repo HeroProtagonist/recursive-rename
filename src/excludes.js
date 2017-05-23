@@ -1,6 +1,29 @@
-const excludes = new Set()
+class Excludes {
+  constructor (folders, override) {
+    this.excludes = new Set()
 
-excludes.add('node_modules')
-excludes.add('.git')
+    if (!override) {
+      this.excludes.add('node_modules')
+      this.excludes.add('.git')
+    }
 
-export default excludes
+    if (folders) {
+      if (typeof folders === 'string') folders = folders.split(',')
+      folders.forEach(folder => this.excludes.add(folder))
+    }
+  }
+
+  get size () {
+    return this.excludes.size
+  }
+
+  add (item) {
+    return this.excludes.add(item)
+  }
+
+  has (item) {
+    return this.excludes.has(item)
+  }
+}
+
+export default Excludes
