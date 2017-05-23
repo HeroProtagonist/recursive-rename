@@ -35,8 +35,8 @@ class Validator {
   }
 
   _handleExcludes (excludes) {
-    if (!Array.isArray(excludes)) {
-      throw new Error('Excludes must be an array')
+    if (excludes && excludes.constructor !== Set) {
+      throw new Error('Excludes must be a set')
     }
 
     this.excludes = excludes

@@ -75,7 +75,7 @@ describe('Validator', () => {
       })
 
       it('calls proper functions when provided only exlude options', () => {
-        const excludes = [1, 2, 3]
+        const excludes = new Set()
         const validator = new Validator('jsx', 'js', { excludes })
 
         expect(excludesSpy.calls.length).toBe(1)
@@ -85,7 +85,7 @@ describe('Validator', () => {
       })
 
       it('calls proper functions when provided only override options', () => {
-        const override = [1, 2, 3]
+        const override = new Set()
         const validator = new Validator('jsx', 'js', { override })
 
         expect(overridesSpy.calls.length).toBe(1)
@@ -114,7 +114,7 @@ describe('Validator', () => {
           errors.push(e)
         }
 
-        expect(errors[0].message).toEqual('Excludes must be an array')
+        expect(errors[0].message).toEqual('Excludes must be a set')
         expect(errors.length).toEqual(2)
       })
 
@@ -124,7 +124,9 @@ describe('Validator', () => {
       })
 
       it('sets excludes', () => {
-        const excludes = ['1', '2', '3']
+        const excludes = new Set()
+        excludes.add(1)
+
         const validator = new Validator('jsx', 'js', { excludes })
         expect(validator.excludes).toBe(excludes)
       })
