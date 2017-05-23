@@ -27,7 +27,9 @@ class Validator {
       throw new Error('When supplied options they must be an object')
     }
 
-    const { excludes, override } = options
+    const { excludes, override, path = '.' } = options
+
+    this.path = path
 
     if (excludes) this._handleExcludes(excludes)
     if (override) this._handleOverride(override)

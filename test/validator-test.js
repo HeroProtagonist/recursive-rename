@@ -94,6 +94,21 @@ describe('Validator', () => {
         expect(excludesSpy.calls.length).toBe(0)
       })
 
+      it('path defaults to current directory if not supplied', () => {
+        const validator = new Validator('jsx', 'js')
+
+        expect(validator.path).toBe('.')
+      })
+
+      it('supplied path value overrides default', () => {
+        const options = {
+          path: 'lion/witch/wardrobe',
+        }
+        const validator = new Validator('jsx', 'js', options)
+
+        expect(validator.path).toBe('lion/witch/wardrobe')
+      })
+
       after(() => {
         expect.restoreSpies()
       })
