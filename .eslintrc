@@ -7,6 +7,7 @@
   "rules": {
     "arrow-parens": ["error", "as-needed"],
     "semi": [2, "never"],
-    "space-before-function-paren": ["error", "always"]
+    "space-before-function-paren": ["error", "always"],
+    "no-underscore-dangle": off,
   }
 }
