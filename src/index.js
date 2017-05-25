@@ -3,7 +3,7 @@ import Validator from './validator'
 import Excludes from './excludes'
 
 class Rename {
-  constructor (initialPath, options) {
+  constructor (options) {
     const { src, dest, exclude, override, path } = options
 
     const { excludes } = new Excludes(exclude)
@@ -17,7 +17,7 @@ class Rename {
     this.validator = new Validator(src, dest, validatorOptions)
   }
 
-  async rename (dry) {
+  async dive (dry) {
     const {
       src,
       dest,

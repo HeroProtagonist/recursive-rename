@@ -109,7 +109,7 @@ Create a new instance that will be used to traverse directory and perform renami
 ##### Options [object]
 	- src [string]: required
 	- dest [string]: required
-	- excludes [array]
+	- exclude [array]
 	- override [array]
 
 #### Renaming
