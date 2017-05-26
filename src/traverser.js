@@ -4,29 +4,56 @@ import Promise from 'bluebird'
 
 const fs = Promise.promisifyAll(require('fs'))
 
+const {
+  readdirAsync,
+  renameAsync,
+  statAsync,
+} = fs
+
 class Traverser {
-  constructor (excludes, initialPath) {
-    this.excludes = excludes
+  constructor (initialPath, options) {
+    const { excludes, dest, src } = options
+
     this.initialPath = initialPath
+    this.excludes = excludes
+    this.dest = dest
+    this.src = src
   }
 
-  async traverse (rootPath = this.initialPath) {
-    const files = await fs.readdirAsync(rootPath)
+  async traverse (options = {}, rootPath = this.initialPath) {
+    const { dry } = options
+    const files = await readdirAsync(rootPath)
 
-    files.forEach(async file => {
+    for (let file of files) {
       const filePath = makePath(rootPath, file)
 
-      const stats = await fs.statAsync(filePath)
+      const stats = await statAsync(filePath)
 
       if (stats.isDirectory() && !this.excludes.has(file)) {
-        console.log(`Folder:  ${file}`.red)
-        this.traverse(filePath)
+        await this.traverse(options, filePath)
       } else {
-        console.log(`This file is: ${file}`.green)
+        await handleFile(file, filePath, this.src, this.dest, dry)
       }
-    })
+    }
+
+    return Promise.resolve()
   }
 
+}
+
+const handleFile = async (file, filePath, src, dest, dry) => {
+  const splitFilePath = filePath.split('.')
+  const filePathNoExt = splitFilePath[0]
+  const srcExt = splitFilePath[1]
+
+  if (srcExt === src) {
+    if (dry) {
+      console.log('Will Rename: '.blue + `${filePath}`.red + ' --> '.yellow + `${filePathNoExt}.${dest}`.green)
+    } else {
+      console.log('Renamed: '.blue + `${filePath}`.red + ' --> '.yellow + `${filePathNoExt}.${dest}`.green)
+      await renameAsync(filePath, `${filePathNoExt}.${dest}`)
+    }
+  }
 }
 
 const makePath = (base = __dirname, file) => path.join(base, file)

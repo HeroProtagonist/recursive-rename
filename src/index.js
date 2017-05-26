@@ -1,17 +1,40 @@
-#! /usr/bin/env node
-
 import Traverser from './traverser'
 import Validator from './validator'
-import excludes from './excludes'
+import Excludes from './excludes'
 
-const argv = require('minimist')(process.argv.slice(2))
+class Rename {
+  constructor (options) {
+    const { src, dest, exclude, override, path } = options
 
-console.log(argv)
-const validator = new Validator(argv)
+    const { excludes } = new Excludes(exclude)
 
-function recursiveRename (initialPath) {
-  const traverser = new Traverser(excludes, initialPath)
-  traverser.traverse()
+    const validatorOptions = {
+      excludes,
+      override,
+      path,
+    }
+
+    this.validator = new Validator(src, dest, validatorOptions)
+  }
+
+  async dive (dry) {
+    const {
+      src,
+      dest,
+      excludes,
+      path,
+    } = this.validator
+
+    const traverser = new Traverser(path, {
+      src,
+      dest,
+      excludes,
+    })
+
+    await traverser.traverse({ dry })
+  }
+
 }
 
-export default recursiveRename
+module.exports = Rename
+export default Rename
