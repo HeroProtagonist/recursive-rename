@@ -17,10 +17,6 @@ class Excludes {
     return this.excludes.size
   }
 
-  add (item) {
-    return this.excludes.add(item)
-  }
-
   has (item) {
     return this.excludes.has(item)
   }
