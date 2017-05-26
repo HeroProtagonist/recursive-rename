@@ -48,7 +48,7 @@ function removeTestDirectory (cb) {
 }
 
 function findTestDirectory (cb) {
-  exec('find test/mock', (err, stdout, stderr) => {
+  exec('find test/mock | sort -n', (err, stdout, stderr) => {
     if (err) {
       console.log('Child process exited with error code', err)
       return
