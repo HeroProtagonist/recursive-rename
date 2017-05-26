@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/HeroProtagonist/recursive-rename.svg?branch=master)](https://travis-ci.org/HeroProtagonist/recursive-rename)
 [![Codecov](https://img.shields.io/codecov/c/github/HeroProtagonist/recursive-rename.svg)](https://codecov.io/github/HeroProtagonist/recursive-rename)
+[![NPM version](https://badge.fury.io/js/recursive-rename.svg)](https://www.npmjs.com/package/recursive-rename)
 
 ![walter-white](gif/walter-white.gif)
 
