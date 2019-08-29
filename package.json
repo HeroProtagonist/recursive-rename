@@ -20,7 +20,8 @@
   },
   "preferGlobal": true,
   "bin": {
-    "rename": "dist/index-bin.js"
+    "rename": "dist/index-bin.js",
+    "recursiveRename": "dist/index-bin.js"
   },
   "keywords": [
     "cli",
