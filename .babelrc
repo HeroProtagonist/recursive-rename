@@ -1,9 +1,4 @@
 {
   "presets": ["latest"],
-  "plugins": ["transform-runtime"],
-  "env": {
-    "test": {
-      "plugins": ["rewire"]
-    }
-  }
+  "plugins": ["transform-runtime"]
 }
