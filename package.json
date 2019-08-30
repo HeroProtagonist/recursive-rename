@@ -11,7 +11,7 @@
     "cover": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "start": "node -r babel-register -r babel-polyfill src/index",
-    "test": "NODE_ENV=test mocha --compilers js:babel-register",
+    "test": "NODE_ENV=test mocha --require babel-core/register",
     "test:watch": "npm t --  --watch",
     "watch": "nodemon -r babel-register -r babel-polyfill src/index"
   },
@@ -38,22 +38,22 @@
     "url": "git+https://github.com/HeroProtagonist/recursive-rename.git"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-latest": "^6.24.1",
-    "codecov": "^2.1.0",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
+    "codecov": "^3.5.0",
+    "eslint": "^6.2.2",
+    "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
     "expect": "^1.20.2",
-    "mocha": "^3.3.0",
+    "mocha": "^6.2.0",
     "mock-fs": "^4.3.0",
     "nodemon": "^1.11.0",
-    "nyc": "^10.3.2",
-    "rimraf": "^2.6.1"
+    "nyc": "^14.1.1",
+    "rimraf": "^3.0.0"
   },
   "dependencies": {
     "babel-runtime": "^6.23.0",
