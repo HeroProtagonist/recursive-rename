@@ -5,10 +5,7 @@ import {
   removeTestDirectory,
 } from './lib'
 
-import {
-  default as Traverser,
-  __RewireAPI__ as TraverserRewireAPI,
-} from '../src/traverser'
+import Traverser from '../src/traverser'
 
 
 describe('Traverser', () => {
