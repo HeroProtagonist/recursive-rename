@@ -6,15 +6,15 @@
 
 ![walter-white](gif/walter-white.gif)
 
-Recursive rename is a simple tool used to manipulate file names. 
+Recursive rename is a simple tool used to manipulate file names.
 
-It can be used from the command line or NodeJS. 
+It can be used from the command line or NodeJS.
 
 * [Installation](#installation)
 * [Examples](#examples)
 * [Usage](#usage)
 	- [Command Line](#command-line)
-	- [Node](#node) 
+	- [Node](#node)
 
 ## Examples
 
@@ -25,12 +25,12 @@ It can be used from the command line or NodeJS.
 Rename all `.jsx` files to `.js` in current directory. By default `node_modules` and `.git` are excluded from the crawl. This can be overridden and/or extended.
 
 	rename jsx js --dry
-Adding the dry flag will return the files that **would** be changed.	
+Adding the dry flag will return the files that **would** be changed.
 ###  Node
 
 Equivalent operations can be performed in Node
 
-```
+```js
 import Rename = 'recursive-rename'
 
 const rename = new Rename({
@@ -43,13 +43,11 @@ rename.dive()
 
 Add dry option to get insight on the renaming process without performing it
 
-```
+```js
 rename.dive({
   dry: true,
 })
 ```
-
-
 
 ## Installation
 
@@ -97,15 +95,19 @@ Informational flags
 
 Using babel
 
-	import Rename from 'recursive-rename'
+```js
+import Rename from 'recursive-rename'
+```
 
-or 
+or
 
-	const Rename = require('recursive-rename')
+```js
+const Rename = require('recursive-rename')
+```
 
 #### Rename(options)
 
-Create a new instance that will be used to traverse directory and perform renaming. 
+Create a new instance that will be used to traverse directory and perform renaming.
 
 ##### Options [object]
 	- src [string]: required
@@ -120,5 +122,5 @@ Create a new instance that will be used to traverse directory and perform renami
 Once instantiated rename has the `dive` method. This will perform the crawl based on the options supplied to `Rename` constructor.
 
 ##### Options [object]
-	- dry [bool] (if present renaming will not occur and output will be list of what would) 
+	- dry [bool] (if present renaming will not occur and output will be list of what would)
 
