@@ -17,7 +17,7 @@ class Traverser {
     this.initialPath = initialPath
     this.excludes = excludes
     this.dest = dest
-    this.src = src
+    this.src = src.split('.')
   }
 
   async traverse (options = {}, rootPath = this.initialPath) {
@@ -43,10 +43,17 @@ class Traverser {
 
 const handleFile = async (file, filePath, src, dest, dry) => {
   const splitFilePath = filePath.split('.')
-  const filePathNoExt = splitFilePath[0]
-  const srcExt = splitFilePath[1]
 
-  if (srcExt === src) {
+  let match = true
+  for (let i = src.length - 1; i >= 0 && match; i--) {
+    if (src[i] !== splitFilePath.pop()) {
+      match = false
+    }
+  }
+
+  const filePathNoExt = splitFilePath.join('.')
+
+  if (match) {
     if (dry) {
       console.log('Will Rename: '.blue + `${filePath}`.red + ' --> '.yellow + `${filePathNoExt}.${dest}`.green)
     } else {
