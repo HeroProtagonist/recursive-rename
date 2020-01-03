@@ -93,14 +93,37 @@ describe('Traverser', () => {
     })
   })
 
-  it('renames double extensions map.js -> map', async () => {
+  it('renames double extensions js.map -> map and keeps preceeding extensions', async () => {
     return new Promise(resolve => {
       findTestDirectory(async filesBefore => {
-        const expectedOutput = generateExpectedOutput(filesBefore, 'map.js', 'map')
+        const expectedOutput = generateExpectedOutput(filesBefore, 'js.map', 'map')
 
         const traverser = new Traverser('test/mock', {
-          src: 'map.js',
+          src: 'js.map',
           dest: 'map',
+          excludes: new Set(),
+        })
+
+        await traverser.traverse()
+
+        findTestDirectory(filesAfter => {
+          expect(filesAfter).toBe(expectedOutput)
+          expect(traverseSpy.calls.length).toBe(5)
+
+          resolve()
+        })
+      })
+    })
+  })
+
+  it('deos not rename files where the src extension is not the last extension', async () => {
+    return new Promise(resolve => {
+      findTestDirectory(async filesBefore => {
+        const expectedOutput = generateExpectedOutput(filesBefore, 'js', 'mjs')
+
+        const traverser = new Traverser('test/mock', {
+          src: 'js',
+          dest: 'mjs',
           excludes: new Set(),
         })
 
