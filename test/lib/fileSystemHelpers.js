@@ -21,8 +21,7 @@ function createTestDirectory (cb) {
         '&& mkdir -p test/mock/inner && touch test/mock/inner/file3.txt ' +
         '&& touch test/mock/inner/file4.jsx && ' +
         'touch test/mock/inner/file5.js && ' +
-        'touch test/mock/inner/file6.ext.map.js && ' +
-        'touch test/mock/inner/file7.map.js.dontrename && ' +
+        'touch test/mock/inner/file6.ext.js.map && ' +
         'mkdir test/mock/inner/deep && ' +
         'touch test/mock/inner/deep/file6.js && ' +
         'touch test/mock/inner/deep/file7.jsx && ' +
