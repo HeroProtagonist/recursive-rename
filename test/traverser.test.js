@@ -93,6 +93,29 @@ describe('Traverser', () => {
     })
   })
 
+  it('renames double extensions map.js -> map', async () => {
+    return new Promise(resolve => {
+      findTestDirectory(async filesBefore => {
+        const expectedOutput = generateExpectedOutput(filesBefore, 'map.js', 'map')
+
+        const traverser = new Traverser('test/mock', {
+          src: 'map.js',
+          dest: 'map',
+          excludes: new Set(),
+        })
+
+        await traverser.traverse()
+
+        findTestDirectory(filesAfter => {
+          expect(filesAfter).toBe(expectedOutput)
+          expect(traverseSpy.calls.length).toBe(5)
+
+          resolve()
+        })
+      })
+    })
+  })
+
   it('respects excludes flag when renaming', async () => {
     return new Promise(resolve => {
       findTestDirectory(async filesBefore => {
