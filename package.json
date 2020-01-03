@@ -13,7 +13,8 @@
     "start": "node -r @babel/register src/index",
     "test": "NODE_ENV=test mocha --require @babel/register",
     "test:watch": "npm t -- --watch",
-    "watch": "nodemon -r @babel/register src/index"
+    "watch": "nodemon -r @babel/register src/index",
+    "prepare": "npm run build"
   },
   "engines": {
     "node": ">=6.8.1"
