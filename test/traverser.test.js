@@ -7,6 +7,10 @@ import {
 
 import Traverser from '../src/traverser'
 
+const generateExpectedOutput = (files, src, dest) => files.replace(
+  new RegExp(`^([a-zA-Z0-9.\\-\\/]*)\\.${src}$`, 'gm'),
+  `$1.${dest}`
+)
 
 describe('Traverser', () => {
   let traverseSpy
@@ -46,7 +50,7 @@ describe('Traverser', () => {
   it('renames source files to destination extension jsx -> js', async () => {
     return new Promise(resolve => {
       findTestDirectory(async filesBefore => {
-        const expectedOutput = filesBefore.replace(/\.jsx/g, '.js')
+        const expectedOutput = generateExpectedOutput(filesBefore, 'jsx', 'js')
 
         const traverser = new Traverser('test/mock', {
           src: 'jsx',
@@ -57,7 +61,7 @@ describe('Traverser', () => {
         await traverser.traverse()
 
         findTestDirectory(filesAfter => {
-          expect(expectedOutput).toBe(filesAfter)
+          expect(filesAfter).toBe(expectedOutput)
           expect(traverseSpy.calls.length).toBe(5)
 
           resolve()
@@ -69,7 +73,7 @@ describe('Traverser', () => {
   it('renames source files to destination extension txt -> doc', async () => {
     return new Promise(resolve => {
       findTestDirectory(async filesBefore => {
-        const expectedOutput = filesBefore.replace(/\.txt/g, '.doc')
+        const expectedOutput = generateExpectedOutput(filesBefore, 'txt', 'doc')
 
         const traverser = new Traverser('test/mock', {
           src: 'txt',
@@ -80,7 +84,7 @@ describe('Traverser', () => {
         await traverser.traverse()
 
         findTestDirectory(filesAfter => {
-          expect(expectedOutput).toBe(filesAfter)
+          expect(filesAfter).toBe(expectedOutput)
           expect(traverseSpy.calls.length).toBe(5)
 
           resolve()
@@ -96,8 +100,9 @@ describe('Traverser', () => {
 
         let expectedOutput = beforeArray.map(path => {
           if (!path.includes('do-not-touch')) {
-            if (path.includes('.jsx')) return path.replace(/\.jsx/g, '.js')
+            return generateExpectedOutput(path, 'jsx', 'js')
           }
+
           return path
         })
 
@@ -115,7 +120,7 @@ describe('Traverser', () => {
         await traverser.traverse()
 
         findTestDirectory(filesAfter => {
-          expect(expectedOutput).toBe(filesAfter)
+          expect(filesAfter).toBe(expectedOutput)
           expect(traverseSpy.calls.length).toBe(4)
 
           resolve()
