@@ -13,7 +13,8 @@
     "start": "node -r babel-register -r babel-polyfill src/index",
     "test": "NODE_ENV=test mocha --require babel-core/register",
     "test:watch": "npm t --  --watch",
-    "watch": "nodemon -r babel-register -r babel-polyfill src/index"
+    "watch": "nodemon -r babel-register -r babel-polyfill src/index",
+    "prepare": "npm run build"
   },
   "engines": {
     "node": ">=6.8.1"
