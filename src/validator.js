@@ -49,7 +49,7 @@ class Validator {
       throw new Error('Override must be a boolean')
     }
 
-   this.override = override
+    this.override = override
   }
 
 }
