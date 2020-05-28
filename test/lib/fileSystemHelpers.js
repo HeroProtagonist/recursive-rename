@@ -13,7 +13,8 @@ import { exec } from 'child_process'
 //     │   └── file7.jsx
 //     ├── file3.txt
 //     ├── file4.jsx
-//     └── file5.js
+//     ├── file5.js
+//     └── file6.ext.js.map
 
 function createTestDirectory (cb) {
   exec('mkdir -p test/mock && touch test/mock/file1.jsx ' +

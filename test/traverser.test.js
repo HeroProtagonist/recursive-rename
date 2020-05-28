@@ -116,7 +116,7 @@ describe('Traverser', () => {
     })
   })
 
-  it('deos not rename files where the src extension is not the last extension', async () => {
+  it('does not rename files where the src extension is not the last extension', async () => {
     return new Promise(resolve => {
       findTestDirectory(async filesBefore => {
         const expectedOutput = generateExpectedOutput(filesBefore, 'js', 'mjs')
