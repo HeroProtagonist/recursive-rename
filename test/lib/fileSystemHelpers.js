@@ -13,7 +13,8 @@ import { exec } from 'child_process'
 //     │   └── file7.jsx
 //     ├── file3.txt
 //     ├── file4.jsx
-//     └── file5.js
+//     ├── file5.js
+//     └── file6.ext.js.map
 
 function createTestDirectory (cb) {
   exec('mkdir -p test/mock && touch test/mock/file1.jsx ' +
@@ -21,11 +22,12 @@ function createTestDirectory (cb) {
         '&& mkdir -p test/mock/inner && touch test/mock/inner/file3.txt ' +
         '&& touch test/mock/inner/file4.jsx && ' +
         'touch test/mock/inner/file5.js && ' +
+        'touch test/mock/inner/file6.ext.js.map && ' +
         'mkdir test/mock/inner/deep && ' +
-        'touch test/mock/inner/deep/file6.js &&' +
-        'touch test/mock/inner/deep/file7.jsx &&' +
+        'touch test/mock/inner/deep/file6.js && ' +
+        'touch test/mock/inner/deep/file7.jsx && ' +
         'mkdir -p test/mock/inner/deep/do-not-touch && ' +
-        'touch test/mock/inner/deep/do-not-touch/file8.jsx &&' +
+        'touch test/mock/inner/deep/do-not-touch/file8.jsx && ' +
         'touch test/mock/inner/deep/do-not-touch/file9.jsx ', (err, stdout, stderr) => {
     if (err) {
       console.log('Child process exited with error code', err)
